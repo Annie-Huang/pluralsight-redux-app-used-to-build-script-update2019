@@ -1,6 +1,7 @@
 https://www.javascriptstuff.com
 https://www.javascriptstuff.com/lists/
 https://www.javascriptstuff.com/react-starter-projects/
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
 
 
 https://github.com/webpack-contrib/eslint-loader/issues/209
