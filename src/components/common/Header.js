@@ -7,8 +7,9 @@ const Header = () => {
         <nav>
             <NavLink to="/" activeStyle={activeStyle} exact>Home</NavLink> {/* So this link will only receive the active style when on homepage */}
             {" | "}
+            <NavLink to="/courses" activeStyle={activeStyle}>Courses</NavLink>
+            {" | "}
             <NavLink to="/about" activeStyle={activeStyle}>About</NavLink>
-
         </nav>
     );
 };
