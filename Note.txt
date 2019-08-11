@@ -1,3 +1,24 @@
 https://www.javascriptstuff.com
 https://www.javascriptstuff.com/lists/
 https://www.javascriptstuff.com/react-starter-projects/
+
+
+
+
+C:\react\pluralsight-redux-app-used-to-build-script-update2019>git init
+C:\react\pluralsight-redux-app-used-to-build-script-update2019>git add .
+C:\react\pluralsight-redux-app-used-to-build-script-update2019>git remote add origin git@github.com:Annie-Huang/pluralsight-redux-app-used-to-build-script-update2019.git
+C:\react\pluralsight-redux-app-used-to-build-script-update2019>git commit .
+C:\react\pluralsight-redux-app-used-to-build-script-update2019>git push -u origin master
+
+
+
+
+
+
+
+
+
+
+
+
