@@ -25,7 +25,9 @@ babel-preset-react-app:
     Transpile JSX and modern JS features like Object spread, class properties, dynamic import, and more to run in today's browser.
     This is also the one used in create-react-app
 
-
+So when you find yourself having to update multiple layers of components just to pass data down to
+the child component that actually uses the data, that can be a good time to add some container components
+that connect to the Redux store.
 
 
 
