@@ -3,7 +3,14 @@ https://www.javascriptstuff.com/lists/
 https://www.javascriptstuff.com/react-starter-projects/
 
 
+https://github.com/webpack-contrib/eslint-loader/issues/209
+https://github.com/apexcharts/vue-apexcharts/issues/19
+https://github.com/yannickcr/eslint-plugin-react/issues/447
 
+
+
+
+####################################################################################
 
 C:\react\pluralsight-redux-app-used-to-build-script-update2019>git init
 C:\react\pluralsight-redux-app-used-to-build-script-update2019>git add .
@@ -12,9 +19,11 @@ C:\react\pluralsight-redux-app-used-to-build-script-update2019>git commit .
 C:\react\pluralsight-redux-app-used-to-build-script-update2019>git push -u origin master
 
 
+Babel can be configured via .babelrc, but I prefer to use package.json
 
-
-
+babel-preset-react-app:
+    Transpile JSX and modern JS features like Object spread, class properties, dynamic import, and more to run in today's browser.
+    This is also the one used in create-react-app
 
 
 
