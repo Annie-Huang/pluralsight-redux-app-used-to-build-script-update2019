@@ -1,4 +1,7 @@
 import React, {Component} from "react";
+import { connect } from "react-redux";
+import * as courseActions from "../../redux/actions/courseActions";
+import PropTypes from "prop-types";
 
 class CoursesPage extends Component {
     // constructor(props) {
@@ -27,7 +30,8 @@ class CoursesPage extends Component {
     handleSubmit = event => {
         // prevent browser from posting back the form.
         event.preventDefault();
-        alert(this.state.course.title);
+        this.props.dispatch(courseActions.createAcourse(this.state.course));
+        // alert(this.state.course.title);
     };
 
     // 1. Don't use this.handleChange.bind(this) because a new function is allocated on every render
@@ -48,4 +52,17 @@ class CoursesPage extends Component {
     }
 }
 
-export default CoursesPage;
+CoursesPage.propTypes = {
+    courses: PropTypes.array.isRequired
+};
+
+function mapStateToProps(state) {
+    return {
+        courses: state.courses
+    };
+}
+
+// export default CoursesPage;
+export default connect(
+    mapStateToProps
+)(CoursesPage);
