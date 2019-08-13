@@ -30,7 +30,18 @@ So when you find yourself having to update multiple layers of components just to
 the child component that actually uses the data, that can be a good time to add some container components
 that connect to the Redux store.
 
-
-
+Memoization:
+One important thing to note is every time the component is updated, the mapStateToProps function is called.
+So if you're doing something expensive in there, you'll want to use a library like Reselect for memoizing.
+Memoization is like caching for function calls.
+Each time a function is called, Reselect checks whether it was just called with those same parameters.
+And if it was, it doesn't call the function.
+Instead, it just returns the memoized value.
+This is useful for increasing performance by avoiding unnecessary operations.
+So if you're doing expensive operations in your mapping, for instance filtering, a list, or making expensive calculations,
+then memoization can help assure that these expensive operations occur less often.
+With Reselect, the selectors that you write in mapStateToProps are efficient because they're only computed
+when one of the arguments change.
+So if you're doing expensive work in mapStateToProps, consider using the Reselect library.
 
 
