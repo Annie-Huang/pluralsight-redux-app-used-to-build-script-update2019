@@ -1,9 +1,49 @@
 import React, {Component} from "react";
 
 class CoursesPage extends Component {
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         course: {
+    //             title: ""
+    //         }
+    //     };
+    //     // this.handleChange = this.handleChange.bind(this);
+    // }
+    
+    // Again, this is called a class field.
+    state = {
+        course: {
+            title: ""
+        }
+    };
+    // This ( () => {...} ) is call class field. IT's in stage 3 of javascript, probably roll in in 2020.
+    // Babel transpile this.
+    handleChange = event => {
+        const course = { ...this.state.course, title: event.target.value };
+        this.setState({ course });
+    };
+
+    handleSubmit = event => {
+        // prevent browser from posting back the form.
+        event.preventDefault();
+        alert(this.state.course.title);
+    };
+
+    // 1. Don't use this.handleChange.bind(this) because a new function is allocated on every render
+    // 2. By attaching an onSubmit handler to the form, both the submit button and the enter key will submit the form.
     render() {
         return (
-            <h2>Courses</h2>
+            <form onSubmit={this.handleSubmit}>
+                <h2>Courses</h2>
+                <h3>Add Course</h3>
+                <input
+                    type="text"
+                    onChange={this.handleChange}
+                    value={this.state.course.title}
+                />
+                <input type="submit" value="Save" />
+            </form>
         );
     }
 }
