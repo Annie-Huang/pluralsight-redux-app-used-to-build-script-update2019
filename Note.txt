@@ -52,4 +52,5 @@ So if you're doing expensive work in mapStateToProps, consider using the Reselec
 tools folder:
 The tools folder will server our mock api visa Express and json-server
 
-
+Thunk:
+A function that wraps an expression to delay its evaluation.
