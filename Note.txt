@@ -3,6 +3,10 @@ https://www.javascriptstuff.com/lists/
 https://www.javascriptstuff.com/react-starter-projects/
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
 https://redux.js.org/recipes/structuring-reducers/normalizing-state-shape
+https://redux.js.org/recipes/reducing-boilerplate
+https://redux-starter-kit.js.org/
+https://github.com/rematch/rematch
+https://github.com/infinitered/reduxsauce
 
 
 https://github.com/webpack-contrib/eslint-loader/issues/209
