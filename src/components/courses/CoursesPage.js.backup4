@@ -17,6 +17,9 @@ class CoursesPage extends Component {
         });
     }
 
+// {this.props.courses.map(course => (
+// <div key={course.title}>{course.title}</div>
+// ))}
     render() {
         return (
             <>
@@ -27,11 +30,20 @@ class CoursesPage extends Component {
     }
 }
 
+// CoursesPage.propTypes = {
+//     courses: PropTypes.array.isRequired,
+//     createCourse: PropTypes.func.isRequired
+// };
 CoursesPage.propTypes = {
     courses: PropTypes.array.isRequired,
     actions: PropTypes.object.isRequired
 };
 
+// function mapStateToProps(state) {
+//     return {
+//         courses: state.courses
+//     };
+// }
 function mapStateToProps(state) {
     return {
         courses:
@@ -50,6 +62,11 @@ function mapStateToProps(state) {
 // function mapDispatchToProps(dispatch) {
 //     return {
 //         createCourse: course => dispatch(courseActions.createCourse(course))
+//     };
+// }
+// function mapDispatchToProps(dispatch) {
+//     return {
+//         actions: bindActionCreators(courseActions, dispatch)
 //     };
 // }
 function mapDispatchToProps(dispatch) {
