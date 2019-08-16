@@ -11,6 +11,7 @@ const ManageCoursePage = ({
     authors,
     loadAuthors,
     loadCourses,
+    saveCourse, // Now calling saveCourse in our component will call the saveCourse function we just bound to dispatch in mapDispatchToProps
     ...props
 }) => {
     const [course, setCourse] = useState({ ...props.course });
@@ -43,12 +44,20 @@ const ManageCoursePage = ({
         }));
     }
 
+    function handleSave(event) {
+        event.preventDefault();
+        // This is passed in on props, so it's already bound to dispatch.
+        // The bound saveCourse on props takes precedence over the unbound saveCourse thunk at the top.
+        saveCourse(course);
+    }
+
     return (
         <CourseForm
             course={course}
             errors={errors}
             authors={authors}
             onChange={handleChange}
+            onSave={handleSave}
         />
     );
 };
@@ -59,19 +68,26 @@ ManageCoursePage.propTypes = {
     courses: PropTypes.array.isRequired,
     loadCourses: PropTypes.func.isRequired,
     loadAuthors: PropTypes.func.isRequired,
+    saveCourse: PropTypes.func.isRequired,
 };
 
-function mapStateToProps(state) {
-    return {
-        course: newCourse,
-        courses: state.courses,
-        authors: state.authors
-    };
-}
+// function mapStateToProps(state) {
+//     return {
+//         course: newCourse,
+//         courses: state.courses,
+//         authors: state.authors
+//     };
+// }
+const mapStateToProps = (state) => ({
+    course: newCourse,
+    courses: state.courses,
+    authors: state.authors
+});
 
 const mapDispatchToProps = {
     loadCourses: courseActions.loadCourses,
-    loadAuthors: authorActions.loadAuthors
+    loadAuthors: authorActions.loadAuthors,
+    saveCourse: courseActions.saveCourse
 };
 
 export default connect(
