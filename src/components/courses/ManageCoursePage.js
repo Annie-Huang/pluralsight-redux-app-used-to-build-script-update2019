@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import * as courseActions from "../../redux/actions/courseActions";
 import * as authorActions from "../../redux/actions/authorActions";
 import PropTypes from "prop-types";
+import CourseForm from "./CourseForm";
+import { newCourse } from "../../../tools/mockData";
 
 // Hooks allow us to handle state and side effects (think lifecycle methods) in function components.
 const ManageCoursePage = ({ courses, authors, loadCourses, loadAuthors }) => {
@@ -28,6 +30,7 @@ const ManageCoursePage = ({ courses, authors, loadCourses, loadAuthors }) => {
 };
 
 ManageCoursePage.propTypes = {
+    course: PropTypes.object.isRequired,
     authors: PropTypes.array.isRequired,
     courses: PropTypes.array.isRequired,
     loadCourses: PropTypes.func.isRequired,
@@ -36,6 +39,7 @@ ManageCoursePage.propTypes = {
 
 function mapStateToProps(state) {
     return {
+        course: newCourse,
         courses: state.courses,
         authors: state.authors
     };
