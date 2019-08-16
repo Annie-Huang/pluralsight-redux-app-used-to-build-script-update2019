@@ -19,6 +19,7 @@ const ManageCoursePage = ({
     // Avoid using Redux for all state, Use pain React state for data only one few components uses. (such as form state)
     // To choose Redux vs local state, ask: "Who cares about this data?" If only a few closely related components use the data, prefer plain React state
     const [course, setCourse] = useState({ ...props.course });
+    const [errors, setErrors] = useState({});
 
     useEffect(() => {
         if (courses.length === 0) {
@@ -35,9 +36,11 @@ const ManageCoursePage = ({
     }, []); // The empty array as a second arguement to effect means the effect will run once when the component mounts.
 
     return (
-        <>
-            <h2>Manage Course</h2>
-        </>
+        <CourseForm
+            course={course}
+            errors={errors}
+            authors={authors}
+        />
     );
 };
 
