@@ -11,6 +11,12 @@ const CourseForm = ({
   saving = false,
   errors = {}
 }) => {
+  /* Things like
+    name="title"
+    label="Title"
+    value={course.title}
+    This convention will allow us to update the corresponding property in state with a single change handler.
+  */
   return (
     <form onSubmit={onSave}>
       <h2>{course.id ? "Edit" : "Add"} Course</h2>

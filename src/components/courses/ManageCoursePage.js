@@ -29,11 +29,26 @@ const ManageCoursePage = ({
         }
     }, []);
 
+    function handleChange(event) {
+        // This destructure avoids the event getting garbage collected so that it's available whthin the nested setCourse call back.
+        const { name, value } = event.target;
+
+        // I'm using the functional form of setState so I can safely set new state that's based on the existing state.
+        setCourse(prevCourse => ({
+            ...prevCourse,
+            // the following is Javascript computed property syntax. It allows us to reference a property via a variable.
+            // So for example, if the input that just changed was the title field, this code is equivalent to saying course.title. Quite handy. And this approach is also outlined in the React docs.
+            // The following is as: if course.name === "authorId", then call parseInt to convert that value to a number, otherwise I use the value that was passed in on the event directly.
+            [name]: name === "authorId" ? parseInt(value, 10) : value
+        }));
+    }
+
     return (
         <CourseForm
             course={course}
             errors={errors}
             authors={authors}
+            onChange={handleChange}
         />
     );
 };
