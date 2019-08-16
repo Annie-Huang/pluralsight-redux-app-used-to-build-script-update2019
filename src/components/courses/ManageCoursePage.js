@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect, useState } from "react"; // The useState Hook allows use to add React state to function components.
 import { connect } from "react-redux";
 import * as courseActions from "../../redux/actions/courseActions";
 import * as authorActions from "../../redux/actions/authorActions";
@@ -7,7 +7,19 @@ import CourseForm from "./CourseForm";
 import { newCourse } from "../../../tools/mockData";
 
 // Hooks allow us to handle state and side effects (think lifecycle methods) in function components.
-const ManageCoursePage = ({ courses, authors, loadCourses, loadAuthors }) => {
+// const ManageCoursePage = ({ courses, authors, loadCourses, loadAuthors }) => {
+// const ManageCoursePage = ({ courses, authors, loadCourses, loadAuthors, course: initialCourse }) => {
+const ManageCoursePage = ({
+    courses,
+    authors,
+    loadAuthors,
+    loadCourses,
+    ...props  // Assign any props I haven't destructed on the left to a variable called props.
+}) => {
+    // Avoid using Redux for all state, Use pain React state for data only one few components uses. (such as form state)
+    // To choose Redux vs local state, ask: "Who cares about this data?" If only a few closely related components use the data, prefer plain React state
+    const [course, setCourse] = useState({ ...props.course });
+
     useEffect(() => {
         if (courses.length === 0) {
             loadCourses().catch(error => {
