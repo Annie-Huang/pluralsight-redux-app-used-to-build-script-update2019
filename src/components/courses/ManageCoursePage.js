@@ -17,7 +17,8 @@ const ManageCoursePage = ({ courses, authors, loadCourses, loadAuthors }) => {
                 alert("Loading authors failed" + error);
             });
         }
-    }); // If you don't add the 2nd argument, the function will run every time the component is renders.
+    //}); // If you don't add the 2nd argument, the function will run every time the component is renders.
+    }, []); // The empty array as a second arguement to effect means the effect will run once when the component mounts.
 
     return (
         <>
