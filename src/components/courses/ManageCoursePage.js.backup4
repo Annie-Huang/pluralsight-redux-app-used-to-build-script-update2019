@@ -15,6 +15,8 @@ const ManageCoursePage = ({
     history,
     ...props
 }) => {
+    // Uh oh: We're copying the course passed in on props to state once on load, before the list of courses is available.
+    // Goal: When our props change, we need to update our component's state.
     const [course, setCourse] = useState({ ...props.course });
     const [errors, setErrors] = useState({});
 
@@ -24,6 +26,8 @@ const ManageCoursePage = ({
                 alert("Loading courses failed" + error);
             });
         } else {
+            // This will copy the course passed in on props to state anytime a new course is passed in.
+            // Another options to resolve access the course url directly is: Set a key on this component's route in App.js so it remount when the key changes.
             setCourse({ ...props.course });
         }
         if (authors.length === 0) {
@@ -31,7 +35,8 @@ const ManageCoursePage = ({
                 alert("Loading authors failed" + error);
             });
         }
-    }, [props.course]);
+    // }, []);
+    }, [props.course]); // Instead, we want it to run any time that a new course is passed in on props.
 
     function handleChange(event) {
         const { name, value } = event.target;
@@ -44,6 +49,8 @@ const ManageCoursePage = ({
     function handleSave(event) {
         event.preventDefault();
         saveCourse(course).then(() => {
+            // This time let's use React Router's history object to redirect.
+            // So you can use <Redirect> or history to redirect.
             history.push("/courses");
         });
     }
@@ -66,20 +73,26 @@ ManageCoursePage.propTypes = {
     loadCourses: PropTypes.func.isRequired,
     loadAuthors: PropTypes.func.isRequired,
     saveCourse: PropTypes.func.isRequired,
-    history: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired // Any component loaded via <Route> gets "history" passed in on props from React Router.
 };
 
+// function like this is called a selector. It selects data from the Redux store.
+// You could declare this in the course reducer for easy reuse.
+// For performance you could memoize using reselect
+// Read selector section in the redux docs.
 export function getCourseBySlug(courses, slug) {
     return courses.find(course => course.slug === slug) || null;
 }
 
+// ownProps: This lets us access the component's props. We can use this to read the URL data injected on props by React Router
 const mapStateToProps = (state, ownProps) => {
     const slug = ownProps.match.params.slug;
     const course =
-        slug && state.courses.length > 0
+        slug && state.courses.length > 0 // mapStateToProps runs every time the Redux store changes. So when courses are available, we'll call getCourseBySlug.
             ? getCourseBySlug(state.courses, slug)
             : newCourse;
     return {
+        // course: newCourse, // Goal: Populate the course object based on the URL
         course,
         courses: state.courses,
         authors: state.authors
