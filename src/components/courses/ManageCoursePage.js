@@ -15,6 +15,8 @@ const ManageCoursePage = ({
     history,
     ...props
 }) => {
+    // Uh oh: We're copying the course passed in on props to state once on load, before the list of courses is available.
+    // Goal: When our props change, we need to update our component's state.
     const [course, setCourse] = useState({ ...props.course });
     const [errors, setErrors] = useState({});
 
@@ -23,13 +25,18 @@ const ManageCoursePage = ({
             loadCourses().catch(error => {
                 alert("Loading courses failed" + error);
             });
+        } else {
+            // This will copy the course passed in on props to state anytime a new course is passed in.
+            // Another options to resolve access the course url directly is: Set a key on this component's route in App.js so it remount when the key changes.
+            setCourse({ ...props.course });
         }
         if (authors.length === 0) {
             loadAuthors().catch(error => {
                 alert("Loading authors failed" + error);
             });
         }
-    }, []);
+    // }, []);
+    }, [props.course]); // Instead, we want it to run any time that a new course is passed in on props.
 
     function handleChange(event) {
         const { name, value } = event.target;
