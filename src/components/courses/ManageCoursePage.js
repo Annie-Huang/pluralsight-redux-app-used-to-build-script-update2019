@@ -12,6 +12,7 @@ const ManageCoursePage = ({
     loadAuthors,
     loadCourses,
     saveCourse,
+    history,
     ...props
 }) => {
     const [course, setCourse] = useState({ ...props.course });
@@ -40,7 +41,11 @@ const ManageCoursePage = ({
 
     function handleSave(event) {
         event.preventDefault();
-        saveCourse(course);
+        saveCourse(course).then(() => {
+            // This time let's use React Router's history object to redirect.
+            // So you can use <Redirect> or history to redirect.
+            history.push("/courses");
+        });
     }
 
     return (
@@ -61,6 +66,7 @@ ManageCoursePage.propTypes = {
     loadCourses: PropTypes.func.isRequired,
     loadAuthors: PropTypes.func.isRequired,
     saveCourse: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired // Any component loaded via <Route> gets "history" passed in on props from React Router.
 };
 
 const mapStateToProps = (state) => ({
