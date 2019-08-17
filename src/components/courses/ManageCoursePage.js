@@ -69,11 +69,28 @@ ManageCoursePage.propTypes = {
     history: PropTypes.object.isRequired // Any component loaded via <Route> gets "history" passed in on props from React Router.
 };
 
-const mapStateToProps = (state) => ({
-    course: newCourse,
-    courses: state.courses,
-    authors: state.authors
-});
+// function like this is called a selector. It selects data from the Redux store.
+// You could declare this in the course reducer for easy reuse.
+// For performance you could memoize using reselect
+// Read selector section in the redux docs.
+export function getCourseBySlug(courses, slug) {
+    return courses.find(course => course.slug === slug) || null;
+}
+
+// ownProps: This lets us access the component's props. We can use this to read the URL data injected on props by React Router
+const mapStateToProps = (state, ownProps) => {
+    const slug = ownProps.match.params.slug;
+    const course =
+        slug && state.courses.length > 0 // mapStateToProps runs every time the Redux store changes. So when courses are available, we'll call getCourseBySlug.
+            ? getCourseBySlug(state.courses, slug)
+            : newCourse;
+    return {
+        // course: newCourse, // Goal: Populate the course object based on the URL
+        course,
+        courses: state.courses,
+        authors: state.authors
+    }
+};
 
 const mapDispatchToProps = {
     loadCourses: courseActions.loadCourses,
