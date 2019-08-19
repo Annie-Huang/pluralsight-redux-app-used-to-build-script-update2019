@@ -51,6 +51,9 @@ const ManageCoursePage = ({
         saveCourse(course).then(() => {
             toast.success("Course saved.");
             history.push("/courses");
+        }).catch(error => {
+            setSaving(false); // this way the user can try submitting the form again after an error occurs.
+            setErrors({ onSave: error.message });
         });
     }
 
