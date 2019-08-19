@@ -5,6 +5,7 @@ import * as authorActions from "../../redux/actions/authorActions";
 import PropTypes from "prop-types";
 import CourseForm from "./CourseForm";
 import { newCourse } from "../../../tools/mockData";
+import Spinner from "../common/Spinner";
 
 const ManageCoursePage = ({
     courses,
@@ -48,7 +49,12 @@ const ManageCoursePage = ({
         });
     }
 
-    return (
+    // We need to hide the form until we have the data.
+    // If we use the same pattern as CoursePage.js, the form will immediately disappear when the user hits save. :(
+    // Instead, let's disable the save button while the save is in progress.
+    return authors.length === 0 || courses.length === 0 ? (
+        <Spinner />
+    ) : (
         <CourseForm
             course={course}
             errors={errors}
