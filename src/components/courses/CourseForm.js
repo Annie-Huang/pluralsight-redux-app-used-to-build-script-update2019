@@ -30,7 +30,7 @@ const CourseForm = ({
         label="Title"
         value={course.title}
         onChange={onChange}
-        error={errors.title}
+        error={errors.title} // Note that the error property corresponds to the input's name.
       />
 
       <SelectInput
