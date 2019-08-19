@@ -18,6 +18,8 @@ const ManageCoursePage = ({
 }) => {
     const [course, setCourse] = useState({ ...props.course });
     const [errors, setErrors] = useState({});
+    // We're going to use local state because only this component and its child uses this data.
+    const [saving, setSaving] = useState(false);
 
     useEffect(() => {
         if (courses.length === 0) {
@@ -44,6 +46,7 @@ const ManageCoursePage = ({
 
     function handleSave(event) {
         event.preventDefault();
+        setSaving(true);
         saveCourse(course).then(() => {
             history.push("/courses");
         });
@@ -61,6 +64,7 @@ const ManageCoursePage = ({
             authors={authors}
             onChange={handleChange}
             onSave={handleSave}
+            saving={saving}
         />
     );
 };
