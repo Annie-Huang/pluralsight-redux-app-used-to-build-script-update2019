@@ -33,7 +33,15 @@ class CoursesPage extends Component {
     // Let's do an optimistic delete. (update the UI immediately)
     handleDeleteCourse = async course => {
         toast.success("Course deleted");
-        this.props.actions.deleteCourse(course);
+
+        // Optimstic tradeoff:
+        // + Better user experience when call successds
+        // - Confusing user experience if call fails
+
+        // this.props.actions.deleteCourse(course)
+        this.props.actions.deleteCourse(course).catch(error => {
+            toast.error("Delete failed. " + error.message, { autoClose: false });
+        });
     };
 
     render() {
