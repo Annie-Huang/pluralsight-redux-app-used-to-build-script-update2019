@@ -29,11 +29,19 @@ class CoursesPage extends Component {
         }
     }
 
+    // Async/Await uses promises behind the scenes, so it can easily interact with promise-based code.
+    // handleDeleteCourse = course => { // Sorry, before should be course.
+    // Benefit: Your async functions are explicitly marked.
     handleDeleteCourse = async course => {
         toast.success("Course deleted");
-        this.props.actions.deleteCourse(course).catch(error => {
+        // this.props.actions.deleteCourse(course).catch(error => {
+        //     toast.error("Delete failed. " + error.message, { autoClose: false });
+        // });
+        try {
+            await this.props.actions.deleteCourse(course);
+        } catch (error) {
             toast.error("Delete failed. " + error.message, { autoClose: false });
-        });
+        }
     };
 
     render() {
