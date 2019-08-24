@@ -1,0 +1,32 @@
+import React from "react";
+import Header from "./Header";
+import { mount, shallow } from "enzyme";
+import { MemoryRouter } from "react-router-dom";
+
+// With mount:
+// - Dom is created in memory via JSDOM
+// - Child components are rendered.
+
+// Summary:
+// Shallow: Fast. Lightweight. Test one component in isolation
+// Mount: More realistic. Render component and children.
+
+// Note how with shallow render you search for the React component tag
+it("contains 3 NavLinks via shallow", () => {
+    const numLinks = shallow(<Header />).find("NavLink").length; // Note that I search for the React component tag when shallow rendering
+    expect(numLinks).toEqual(3);
+});
+
+// Note how with mount you search for the final rendered HTML since it generates the final DOM.
+// We also need to pull in React Router's memoryRouter for testing since the Header expects to have React Router's props passed in.
+it("contains 3 anchors via mount", () => {
+    // Also, with mount, I have to pull in React Router's memory router because the Header component expects
+    // to be run as a child of React Router and receive React Router's props.
+    const numAnchors = mount(
+        <MemoryRouter>
+            <Header />
+        </MemoryRouter>
+    ).find("a").length;
+
+    expect(numAnchors).toEqual(3);
+});
