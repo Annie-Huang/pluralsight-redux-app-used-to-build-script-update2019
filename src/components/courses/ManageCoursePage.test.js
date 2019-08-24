@@ -1,6 +1,9 @@
 import React from "react";
 import { mount } from "enzyme";
 import { authors, newCourse, courses } from "../../../tools/mockData";
+// This is to import the default export
+// import ManageCoursePage from "./ManageCoursePage";
+// This is to import the named export
 import { ManageCoursePage } from "./ManageCoursePage";
 
 function render(args) {

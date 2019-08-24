@@ -8,7 +8,12 @@ import { newCourse } from "../../../tools/mockData";
 import Spinner from "../common/Spinner";
 import { toast } from "react-toastify";
 
-const ManageCoursePage = ({
+
+// Now this file contains 2 exports:
+// 1. Unconnected component --> we can use it for unit test
+// 2. Connected component
+export const ManageCoursePage = ({
+// const ManageCoursePage = ({
     courses,
     authors,
     loadAuthors,
